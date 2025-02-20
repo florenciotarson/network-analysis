@@ -114,7 +114,6 @@ streamlit run security_dashboard.py
 ```
 
 This will:
-
 - Launch an interactive **Streamlit dashboard**.
 - Show suspicious **IPs, large request sizes, and after-hours activity**.
 - **Display charts, tables, and data summaries**.
@@ -124,10 +123,16 @@ This will:
 python -m scripts.data_exploration
 ```
 
+This will:
+- **Load and inspect the dataset**.
+- Display **summary statistics** (e.g., mean, median, min, max, standard deviation).
+- Show **data types and check for missing values**.
+
 ### **🔹 Step 6: Run exploratory analysis**
 ```bash
 python -m scripts.exploratory_analysis
 ```
+
 This will:
 - Identify **suspicious IPs, large request sizes, and after-hours activity**.
 - Generate **basic visualizations** (histogram, country distribution, time trends).
@@ -135,6 +140,7 @@ This will:
 ### **🔹 Step 7: Perform risk analysis**
 ```bash
 python -m scripts.risk_analysis
+
 ```
 This will:
 - Identify **suspicious IPs**, **large request sizes**, and **after-hours activity**.
@@ -144,6 +150,7 @@ This will:
 ```bash
 python -m scripts.risk_analysis_2
 ```
+
 This will:
 - Checks **IP request counts, unusually large requests, and after-hours traffic**.
 - Prints a concise **summary of suspicious activities in the console**.
@@ -153,6 +160,7 @@ This will:
 ```bash
 python -m scripts.pipeline
 ```
+
 This will:
 - Run **EDA + Risk Analysis**.
 - Create a **security_report.html** with all findings.
@@ -164,19 +172,19 @@ This will:
 
 **🔹 Features:**
 - **Suspicious IP Identification.**
-- Highlights IPs exceeding a configurable request threshold.
+   Highlights IPs exceeding a configurable request threshold.
 
 - **Large Request Analysis.**
-- Detects unusually large data transfers.
-- Displays distribution histograms of request sizes.
+   Detects unusually large data transfers.
+   Displays distribution histograms of request sizes.
 
 - **After-Hours Traffic Detection.**
-- Identifies requests occurring outside standard business hours.
-- Shows trends over time.
+   Identifies requests occurring outside standard business hours.
+   Shows trends over time.
 
 - **Geographical Distribution of Requests.**
-- Analyzes client country activity.
-- Displays a bar chart of top request origins.
+   Analyzes client country activity.
+   Displays a bar chart of top request origins.
 
 **🔹 Run the Security Dashboard**
 ```bash
