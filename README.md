@@ -6,7 +6,7 @@ This repository focuses on **exploratory data analysis (EDA)** and **security ri
 
 ---
 
-## ** Table of Contents**
+## **Table of Contents**
 1. [Introduction](#introduction)
 2. [Project Objectives](#project-objectives)
 3. [Project Structure](#project-structure)
@@ -54,12 +54,7 @@ This repository focuses on **exploratory data analysis (EDA)** and **security ri
 
 ---
 
-## **3. Project Structure**
-
-The repository is organized as follows:
-
-```
-## 3. Project Structure
+## **Project Structure**
 
 The repository is organized as follows:
 
@@ -81,6 +76,7 @@ network-analysis/
 │   └── risk_analysis_2.py            # Alternative risk analysis script
 ├── README.md
 └── requirements.txt                  # Dependencies
+
 
 ```
 
@@ -110,23 +106,37 @@ pip install -r requirements.txt
 Ensure that `network_data.csv` is placed inside the `data/` folder.  
 Alternatively, **update the file path in `config.py`** if your dataset is stored elsewhere.
 
-### **🔹 Step 4: Run exploratory analysis**
+### **🔹 Step 4: Basic data exploration**
+```bash
+python -m scripts.data_exploration
+```
+
+### **🔹 Step 5: Run exploratory analysis**
 ```bash
 python -m scripts.exploratory_analysis
 ```
 This will:
-- Display **dataset structure, missing values, and statistics**.
+- Identify **suspicious IPs, large request sizes, and after-hours activity**.
 - Generate **basic visualizations** (histogram, country distribution, time trends).
 
-### **🔹 Step 5: Perform risk analysis**
+### **🔹 Step 6: Perform risk analysis**
 ```bash
 python -m scripts.risk_analysis
 ```
 This will:
 - Identify **suspicious IPs**, **large request sizes**, and **after-hours activity**.
-- Print **risk summaries** and save findings.
+- Print **risk summaries** and relevant findings in the console.
 
-### **🔹 Step 6: Generate a security report**
+(Alternatively, you can try risk_analysis_2.py for a slightly different approach:)
+```bash
+python -m scripts.risk_analysis_2
+```
+This will:
+- Checks **IP request counts, unusually large requests, and after-hours traffic**.
+- Prints a concise **summary of suspicious activities in the console**.
+- Perfect for quickly **validating changes in your threshold or focusing on a narrower set of security indicators**.
+
+### **🔹 Step 7: Generate a security report**
 ```bash
 python -m scripts.pipeline
 ```

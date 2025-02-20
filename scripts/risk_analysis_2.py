@@ -103,9 +103,9 @@ def main():
             print("=== After-Hours Requests ===")
             print(f"Total requests outside 8 AM-6 PM: {len(after_hours)}\n")
         else:
-            print("⚠ Warning: No valid timestamps found. Skipping time-based checks.\n")
+            print(" Warning: No valid timestamps found. Skipping time-based checks.\n")
     else:
-        print("⚠ Warning: 'EdgeStartTimestamp' column not found; skipping time-based checks.\n")
+        print(" Warning: 'EdgeStartTimestamp' column not found; skipping time-based checks.\n")
 
     print("=== Risk Analysis Complete ===")
     print("Consider investigating any flagged IPs, large requests, or after-hours spikes.")
