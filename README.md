@@ -11,8 +11,9 @@ This repository focuses on **exploratory data analysis (EDA)** and **security ri
 2. [Project Objectives](#project-objectives)
 3. [Project Structure](#project-structure)
 4. [Installation & Usage](#installation--usage)
-5. [Security Policy & Mitigation Strategies](#security-policy--mitigation-strategies)
-6. [Contact & Final Thoughts](#contact--final-thoughts)
+5. [Security Dashboard (`security_dashboard.py`)](#security-dashboard-security_dashboardpy)
+6. [Security Policy & Mitigation Strategies](#security-policy--mitigation-strategies)
+7. [Contact & Final Thoughts](#contact--final-thoughts)
 
 ---
 
@@ -73,9 +74,10 @@ network-analysis/
 │   ├── pipeline.py                   # Runs full pipeline (EDA + risk analysis + reporting)
 │   ├── report_generator.py           # Generates HTML reports
 │   ├── risk_analysis.py              # Identifies suspicious activity in traffic logs
-│   └── risk_analysis_2.py            # Alternative risk analysis script
+│   └── security_dashboard.py          # Streamlit-based Security Dashboard
 ├── README.md
-└── requirements.txt                  # Dependencies
+├── requirements.txt                  # Dependencies
+└── security_report.html               # Security analysis report
 
 
 ```
@@ -106,12 +108,23 @@ pip install -r requirements.txt
 Ensure that `network_data.csv` is placed inside the `data/` folder.  
 Alternatively, **update the file path in `config.py`** if your dataset is stored elsewhere.
 
-### **🔹 Step 4: Basic data exploration**
+### **🔹 Step 4: Run the security dashboard**
+```bash
+streamlit run security_dashboard.py
+```
+
+This will:
+
+- Launch an interactive **Streamlit dashboard**.
+- Show suspicious **IPs, large request sizes, and after-hours activity**.
+- **Display charts, tables, and data summaries**.
+
+### **🔹 Step 5: Basic data exploration**
 ```bash
 python -m scripts.data_exploration
 ```
 
-### **🔹 Step 5: Run exploratory analysis**
+### **🔹 Step 6: Run exploratory analysis**
 ```bash
 python -m scripts.exploratory_analysis
 ```
@@ -119,7 +132,7 @@ This will:
 - Identify **suspicious IPs, large request sizes, and after-hours activity**.
 - Generate **basic visualizations** (histogram, country distribution, time trends).
 
-### **🔹 Step 6: Perform risk analysis**
+### **🔹 Step 7: Perform risk analysis**
 ```bash
 python -m scripts.risk_analysis
 ```
@@ -136,7 +149,7 @@ This will:
 - Prints a concise **summary of suspicious activities in the console**.
 - Perfect for quickly **validating changes in your threshold or focusing on a narrower set of security indicators**.
 
-### **🔹 Step 7: Generate a security report**
+### **🔹 Step 8: Generate a security report**
 ```bash
 python -m scripts.pipeline
 ```
@@ -146,7 +159,32 @@ This will:
 
 ---
 
-## **5. Security Risks & Mitigation Strategies**
+## **5.Security Dashboard (security_dashboard.py)**
+**security_dashboard.py** is a Streamlit-based interactive visualization tool that enables real-time security monitoring.
+
+**🔹 Features:**
+- **Suspicious IP Identification.**
+- Highlights IPs exceeding a configurable request threshold.
+
+- **Large Request Analysis.**
+- Detects unusually large data transfers.
+- Displays distribution histograms of request sizes.
+
+- **After-Hours Traffic Detection.**
+- Identifies requests occurring outside standard business hours.
+- Shows trends over time.
+
+- **Geographical Distribution of Requests.**
+- Analyzes client country activity.
+- Displays a bar chart of top request origins.
+
+**🔹 Run the Security Dashboard**
+```bash
+streamlit run security_dashboard.py
+```
+The dashboard provides real-time visual insights into security risks.
+
+## **6. Security Risks & Mitigation Strategies**
 
 Based on network traffic patterns, we focus on the following threats:
 
@@ -176,32 +214,33 @@ Based on network traffic patterns, we focus on the following threats:
 
 ---
 
-## **6. Next Steps**
-- ** Extend Analysis:**  
-  - Identify more advanced **anomalies and attack patterns**.
-  - Improve risk detection using **machine learning models**.
+## **7. Next Steps**
+# Extend Analysis:
+- Identify more advanced anomalies and attack patterns.
+- Improve risk detection using machine learning models.
 
-- ** Automate Reporting:**  
-  - Enhance the **HTML report generator** with more visualizations.
-  - Integrate with **SIEM tools** for security alerts.
+# Automate Reporting:
+- Enhance the HTML report generator with more visualizations.
+- Integrate with SIEM tools for security alerts.
 
-- ** Strengthen Security Policies:**  
-  - Implement **proactive risk monitoring** & **automated responses**.
-  - Develop **a real-time risk detection pipeline**.
-
----
-
-## **7. License & Attribution**
-This project is the property of **Oxecollective Consulting**.  
-Usage is permitted for **learning and internal security assessment** purposes.
-
-> ** Disclaimer:**  
-> This project is for **educational & research purposes**.  
-> It does not replace professional security solutions or policies.
+# Strengthen Security Policies:
+- Implement proactive risk monitoring & automated responses.
+- Develop a real-time risk detection pipeline.
 
 ---
 
-## **8. Contact**
+## **8. License & Attribution**
+This project is the property of Oxecollective Consulting.
+Usage is permitted for learning and internal security assessment purposes.
+
+Disclaimer:
+This project is for educational & research purposes.
+It does not replace professional security solutions or policies.
+
+
+---
+
+## **9. Contact**
 For inquiries, reach out via **[Oxecollective Consulting](http://www.oxecollective.com)**.  
 
 ---

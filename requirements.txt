@@ -5,6 +5,5 @@ numpy
 matplotlib
 scikit-learn
 seaborn
-
-# logging is part of Python's standard library 
-# and does not need to be installed via pip.
+streamlit
+plotly  # Added for interactive visualizations in Streamlit
