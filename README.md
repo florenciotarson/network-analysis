@@ -172,19 +172,19 @@ This will:
 
 **🔹 Features:**
 - **Suspicious IP Identification.**
-   Highlights IPs exceeding a configurable request threshold.
+Highlights IPs exceeding a configurable request threshold.
 
 - **Large Request Analysis.**
-   Detects unusually large data transfers.
-   Displays distribution histograms of request sizes.
+Detects unusually large data transfers.
+Displays distribution histograms of request sizes.
 
 - **After-Hours Traffic Detection.**
-   Identifies requests occurring outside standard business hours.
-   Shows trends over time.
+Identifies requests occurring outside standard business hours.
+Shows trends over time.
 
 - **Geographical Distribution of Requests.**
-   Analyzes client country activity.
-   Displays a bar chart of top request origins.
+Analyzes client country activity.
+Displays a bar chart of top request origins.
 
 **🔹 Run the Security Dashboard**
 ```bash
