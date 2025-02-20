@@ -77,14 +77,14 @@ network-analysis/
 │   ├── config.py                     # Arquivo de configuração (caminhos, limites)
 │   ├── data_exploration.py           # Script de EDA básico (exibe informações e estatísticas)
 │   ├── eda.py                        # Realiza EDA estatístico e visual
-│   ├── exploratory_analysis.py        # Script de EDA via linha de comando
+│   ├── exploratory_analysis.py       # Script de EDA via linha de comando
 │   ├── pipeline.py                   # Executa todo o pipeline (EDA + análise de riscos + relatórios)
 │   ├── report_generator.py           # Gera relatórios HTML
 │   ├── risk_analysis.py              # Identifica atividades suspeitas nos logs de tráfego
-│   └── security_dashboard.py          # Painel de Segurança interativo via Streamlit
+│   └── security_dashboard.py         # Painel de Segurança interativo via Streamlit
 ├── README.md
-├── requirements.txt                   # Dependências
-└── security_report.html                # Relatório de segurança
+├── requirements.txt                  # Dependências
+└── security_report.html              # Relatório de segurança
 ```
 
 ---
