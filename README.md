@@ -135,4 +135,5 @@ notices or ownership information. All rights to the original code and its intell
 
 ---
 
-``` [www.oxecollective.com](http://www.oxecollective.com) ```
+[www.oxecollective.com](http://www.oxecollective.com)
+```
