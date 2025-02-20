@@ -1,7 +1,7 @@
 
 ## Traduções disponíveis
 - 🇧🇷 Português (Atual)
-- 🇬🇧 [Inglês](SECURITY_POLICY.md)
+- 🇺🇸 [Inglês](SECURITY_POLICY.md)
 
 
 # Política de Segurança (`SECURITY_POLICY_pt-br.md`)
