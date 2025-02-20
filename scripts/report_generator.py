@@ -29,10 +29,9 @@ def generate_html_report(
               - 'plot1', 'plot2', 'plot3': Paths to saved plot images (if any).
         risk_results (Dict[str, Any]):
             A dictionary containing identified security risks, such as:
-              - 'suspicious_ips': HTML table of IPs exceeding a request threshold
-              - 'large_requests': HTML snippet describing large request findings
-              - 'after_hours': HTML snippet for requests made after normal
-                business hours.
+              - 'suspicious_ips': DataFrame of flagged IPs
+              - 'large_requests': Large request summary
+              - 'after_hours': After-hours request summary.
         output_file (str, optional):
             The name (and path) of the output HTML file. Defaults to 
             "security_report.html".
@@ -48,6 +47,22 @@ def generate_html_report(
     output_dir = os.path.dirname(output_file)
     if output_dir and not os.path.exists(output_dir):
         os.makedirs(output_dir)
+
+    # Format Suspicious IPs Table
+    suspicious_ips_html = "<p>No suspicious IPs detected.</p>"
+    if hasattr(risk_results.get("suspicious_ips"), "to_html"):
+        suspicious_ips_html = risk_results["suspicious_ips"].to_html(classes="table table-bordered")
+
+    # Large Request and After-Hours Formatting
+    large_requests_html = (
+        f"<p>Threshold: {risk_results.get('large_requests', 'N/A')}.</p>"
+        if "large_requests" in risk_results else "<p>No large request analysis available.</p>"
+    )
+
+    after_hours_html = (
+        f"<p>After-hours requests: {risk_results.get('after_hours', 'N/A')}</p>"
+        if "after_hours" in risk_results else "<p>No time-based risk analysis available.</p>"
+    )
 
     # HTML Content
     html_content = f"""
@@ -150,13 +165,13 @@ def generate_html_report(
             <h2>5. Risk Analysis</h2>
             
             <h3>Suspicious IPs</h3>
-            {risk_results.get('suspicious_ips', '<p>No IP risk analysis available.</p>')}
+            {suspicious_ips_html}
             
             <h3>Large Request Sizes</h3>
-            {risk_results.get('large_requests', '<p>No size risk analysis available.</p>')}
+            {large_requests_html}
             
             <h3>After-Hours Requests</h3>
-            {risk_results.get('after_hours', '<p>No time-based risk analysis available.</p>')}
+            {after_hours_html}
         </div>
     </body>
     </html>
