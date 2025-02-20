@@ -1,6 +1,6 @@
 
 ## Traduções disponíveis
-- 🇬🇧 [English](README.md)
+- 🇺🇸 [English](README.md)
 - 🇧🇷 Português (Atual)
 
 # Análise de Rede
