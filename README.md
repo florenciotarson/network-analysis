@@ -1,4 +1,10 @@
+
+## Available translations
+- 🇬🇧 English (Current)
+- 🇧🇷 [Portuguese](README_pt-br.md)
+
 # **Network-Analysis**
+
 > **Exploratory Data Analysis & Risk Assessment for Network Traffic**
 
 Welcome to the **Network Analysis & Risk Assessment Project**!  

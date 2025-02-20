@@ -1,16 +1,19 @@
-Here is the **adjusted Portuguese version** of your **README** in Markdown, with all issues corrected for **perfect consistency** with the English version.
-
 ```markdown
+
+## Traduções disponíveis
+- 🇬🇧 [English](README.md)
+- 🇧🇷 Português (Atual)
+
 # Análise de Rede
 
-> Análise Exploratória de Dados & Avaliação de Riscos para Tráfego de Rede
+> **Análise Exploratória de Dados & Avaliação de Riscos para Tráfego de Rede**
 
 Bem-vindo ao **Projeto de Análise de Rede & Avaliação de Riscos**!  
 Este repositório foca na **análise exploratória de dados (EDA)** e na **avaliação de riscos de segurança** para dados de tráfego de rede, fornecendo uma abordagem abrangente para identificar ameaças e mitigar vulnerabilidades.
 
 ---
 
-## Índice
+## **Índice**
 
 1. [Introdução](#introdução)
 2. [Objetivos do Projeto](#objetivos-do-projeto)
@@ -22,7 +25,7 @@ Este repositório foca na **análise exploratória de dados (EDA)** e na **avali
 
 ---
 
-## Introdução
+## **Introdução**
 
 > Este projeto demonstra **análise de dados**, **raciocínio lógico** e **identificação e mitigação de riscos de segurança**.  
 > Os principais focos incluem:
@@ -41,7 +44,7 @@ Este repositório foca na **análise exploratória de dados (EDA)** e na **avali
 
 ---
 
-## Objetivos do Projeto
+## **Objetivos do Projeto**
 
 1. **Análise Exploratória de Dados (EDA)**  
    - Realizar uma **exploração profunda** dos logs de tráfego de rede.  
@@ -60,7 +63,7 @@ Este repositório foca na **análise exploratória de dados (EDA)** e na **avali
 
 ---
 
-## Estrutura do Projeto
+## **Estrutura do Projeto**
 
 O repositório está organizado da seguinte forma:
 
@@ -87,7 +90,7 @@ network-analysis/
 
 ---
 
-## Arquivos Principais
+## **Arquivos Principais**
 
 - **`config.py`** → Define constantes (caminhos de arquivos, limites).  
 - **`pipeline.py`** → Automatiza o processamento de dados, análise e geração de relatórios.  
@@ -97,89 +100,148 @@ network-analysis/
 
 ---
 
-## Instalação e Uso
+## **Instalação e Uso**
 
-### Passo 1: Clonar o repositório
+### **🔹 Passo 1: Clonar o repositório**
 
 ```bash
 git clone https://github.com/florenciotarson/network-analysis.git
 cd network-analysis
 ```
 
-### Passo 2: Instalar dependências
+### **🔹 Passo 2: Instalar dependências**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Passo 3: Preparar os dados
+### **🔹 Passo 3: Preparar os dados**
 
 Certifique-se de que o arquivo `network_data.csv` está dentro da pasta `data/`.  
 Caso contrário, **atualize o caminho do arquivo no `config.py`**.
 
-### Passo 4: Executar o painel de segurança
-
+### **🔹 Passo 4: Executar o painel de segurança**
 ```bash
 streamlit run security_dashboard.py
 ```
 
-Isso abrirá um painel interativo mostrando:
-- **IPs suspeitos, tamanhos de requisição incomuns e atividades fora do horário comercial**.  
-- **Gráficos, tabelas e resumos dos dados**.
+Isso irá:
+- Iniciar um **painel interativo do Streamlit**.
+- Exibir **IPs suspeitos, tamanhos de requisição incomuns e atividades fora do horário comercial**.
+- **Exibir gráficos, tabelas e resumos dos dados**.
 
----
+### **🔹 Passo 5: Exploração básica dos dados**
+```bash
+python -m scripts.data_exploration
+```
 
-## Política de Segurança e Estratégias de Mitigação
+Isso irá:
+- **Carregar e inspecionar o conjunto de dados**.
+- Exibir **estatísticas resumidas** (ex: média, mediana, mínimo, máximo, desvio padrão).
+- Mostrar **tipos de dados e verificar valores ausentes**.
 
-### Atividade Suspeita de IPs
+### **🔹 Passo 6: Executar a análise exploratória**
+```bash
+python -m scripts.exploratory_analysis
+```
+
+Isso irá:
+- Identificar **IPs suspeitos, tamanhos de requisição incomuns e atividades fora do horário comercial**.
+- Gerar **visualizações básicas** (histograma, distribuição geográfica, tendências ao longo do tempo).
+
+### **🔹 Passo 7: Realizar análise de risco**
+```bash
+python -m scripts.risk_analysis
+```
+
+Isso irá:
+- Identificar **IPs suspeitos**, **tamanhos de requisição incomuns** e **atividade fora do horário comercial**.
+- Exibir **resumos de risco** e descobertas relevantes no console.
+
+(Como alternativa, você pode testar `risk_analysis_2.py` para uma abordagem ligeiramente diferente:)
+```bash
+python -m scripts.risk_analysis_2
+```
+
+Isso irá:
+- Verificar **contagens de requisições de IPs, requisições incomuns e tráfego fora do horário comercial**.
+- Exibir um **resumo conciso das atividades suspeitas no console**.
+- Perfeito para **validar rapidamente mudanças nos limites ou focar em um conjunto mais específico de indicadores de segurança**.
+
+### **🔹 Passo 8: Gerar um relatório de segurança**
+```bash
+python -m scripts.pipeline
+```
+
+Isso irá:
+- Executar **EDA + Análise de Risco**.
+- Criar um **arquivo security_report.html** com todas as descobertas.
+
+
+## **6. Política de Segurança e Estratégias de Mitigação**
+
+### ** 1. Atividade Suspeita de IPs**
 
 | Risco | Mitigação |
-|------|------------|
+|-------|-----------|
 | Alto volume de requisições de um único IP | Implementar **limitação de taxa** e **bloqueio de IPs** |
 | Requisições repetidas de locais desconhecidos | Usar **filtros de geolocalização** e **mecanismos de autenticação** |
 
-### Transferências de Dados Incomuns
+### ** 2. Transferências de Dados Incomuns**
 
 | Risco | Mitigação |
-|------|------------|
+|-------|-----------|
 | Requisições com tamanho anormalmente alto | **Monitorar tamanhos de requisição** e alertar sobre anomalias |
 | Comportamento incomum de upload/download | **Definir limites** e **restringir endpoints sensíveis** |
 
-### Tráfego Fora do Horário Comercial
+### ** 3. Tráfego Fora do Horário Comercial**
 
 | Risco | Mitigação |
-|------|------------|
+|-------|-----------|
 | Alto tráfego fora do horário comercial | Marcar como **atividade fora do padrão** |
 | Possíveis tentativas de acesso não autorizado | Usar **logs de acesso** e **análise de comportamento do usuário** |
 
+### **4. Padrões de Tráfego Anômalos**
+| Risco | Mitigação |
+|-------|-----------|
+| Picos repentinos no tráfego | Detectar **atividade semelhante a DDoS** e aplicar **controles de taxa** |
+| Métodos HTTP incomuns ou códigos de erro elevados | Monitorar **potenciais ataques** e aplicar **regras de firewall** |
+
+
 ---
 
-## Próximos Passos
+## **7. Próximos Passos**
+# Ampliar a Análise:
+- Identificar anomalias mais avançadas e padrões de ataque.
+- Melhorar a detecção de riscos utilizando modelos de aprendizado de máquina.
 
-- **Melhorar detecção de anomalias** e **padrões de ataque**.  
-- **Automatizar relatórios** e integração com **ferramentas SIEM**.  
-- **Implementar monitoramento em tempo real** e **respostas automatizadas**.  
+# Automatizar Relatórios:
+- Aprimorar o gerador de relatórios HTML com mais visualizações.
+- Integrar com ferramentas SIEM para alertas de segurança.
+
+# Reforçar Políticas de Segurança:
+- Implementar monitoramento proativo de riscos e respostas automatizadas.
+- Desenvolver um pipeline de detecção de riscos em tempo real.
 
 ---
 
-## Licença e Atribuição
+## **8. Licença e Atribuição**
+Este projeto é de propriedade da Oxecollective Consulting.  
+O uso é permitido para fins de aprendizado e avaliação interna de segurança.
 
-Este projeto é de propriedade da **Oxecollective Consulting**.  
-O uso é permitido para aprendizado e avaliações internas de segurança.
-
-**Aviso:**  
+Aviso:  
 Este projeto é para fins educacionais e de pesquisa.  
 Ele não substitui soluções ou políticas profissionais de segurança.
 
----
-
-## Contato
-
-Para dúvidas ou mais informações, entre em contato via **[Oxecollective Consulting](http://www.oxecollective.com)**.  
 
 ---
 
-## Recursos Relacionados
+## **9. Contato**
+Para dúvidas, entre em contato via **[Oxecollective Consulting](http://www.oxecollective.com)**.
+
+---
+
+## ** Recursos Relacionados**
 
 - [OWASP Práticas de Segurança](https://owasp.org/)  
 - [MITRE ATT&CK Framework](https://attack.mitre.org/)  
