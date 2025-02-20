@@ -25,11 +25,16 @@ Notes:
   IP addresses further.
 """
 
+import logging
 import pandas as pd
 
-# Minimal change: relative import from .config
-from .config import DATA_PATH
-
+# 🔹 Import configuration values
+try:
+    from scripts.config import DATA_PATH, SUSPICIOUS_IP_THRESHOLD
+except ImportError:
+    logging.warning("Could not import config values. Using default values.")
+    DATA_PATH = "../data/network_data.csv"
+    SUSPICIOUS_IP_THRESHOLD = 100  # Default fallback
 
 def main():
     """
@@ -43,8 +48,15 @@ def main():
     4. (Optional) Inspect time distribution if a timestamp column is present.
     """
 
-    # 1. Load the network traffic data (from config.py instead of a hard-coded path)
-    df = pd.read_csv(DATA_PATH)
+    # 1. Load the network traffic data (now with error handling)
+    try:
+        df = pd.read_csv(DATA_PATH)
+    except FileNotFoundError:
+        print(f"Error: Data file '{DATA_PATH}' not found. Please check the path.")
+        return
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        return
 
     # Basic check: ensure we have rows to analyze
     if df.empty:
@@ -58,41 +70,42 @@ def main():
         print(ip_counts)
         print()
 
-        suspicious_ips = ip_counts[ip_counts > 100]
+        suspicious_ips = ip_counts[ip_counts > SUSPICIOUS_IP_THRESHOLD]
         if not suspicious_ips.empty:
-            print("Suspicious IPs (more than 100 requests):")
+            print(f"Suspicious IPs (more than {SUSPICIOUS_IP_THRESHOLD} requests):")
             print(suspicious_ips)
             print()
     else:
-        print("Warning: 'ClientIP' column not found; skipping IP-based checks.\n")
+        print("⚠ Warning: 'ClientIP' column not found; skipping IP-based checks.\n")
 
     # 3. Check for unusually large request sizes
     if 'ClientRequestBytes' in df.columns:
         high_threshold = df['ClientRequestBytes'].quantile(0.95)
         large_requests = df[df['ClientRequestBytes'] > high_threshold]
+
         print("=== Potentially Large Requests (above 95th percentile) ===")
-        print(f"Threshold: {high_threshold}")
+        print(f"Threshold: {high_threshold:.2f}")
         print(f"Number of large requests: {len(large_requests)}\n")
     else:
-        print("Warning: 'ClientRequestBytes' column not found; skipping size checks.\n")
+        print("⚠ Warning: 'ClientRequestBytes' column not found; skipping size checks.\n")
 
     # 4. Inspect time distribution if a timestamp column is present
     if 'EdgeStartTimestamp' in df.columns:
-        df['EdgeStartTimestamp'] = pd.to_datetime(
-            df['EdgeStartTimestamp'],
-            errors='coerce'
-        )
-        valid_times = df['EdgeStartTimestamp'].dropna()
-        if not valid_times.empty:
+        df['EdgeStartTimestamp'] = pd.to_datetime(df['EdgeStartTimestamp'], errors='coerce')
+        
+        # Remove invalid timestamps
+        df = df.dropna(subset=['EdgeStartTimestamp'])
+        
+        if not df.empty:
             df['Hour'] = df['EdgeStartTimestamp'].dt.hour
             after_hours = df[(df['Hour'] < 8) | (df['Hour'] > 18)]
+
             print("=== After-Hours Requests ===")
             print(f"Total requests outside 8 AM-6 PM: {len(after_hours)}\n")
         else:
-            print("No valid timestamps found. Skipping time-based checks.\n")
+            print("⚠ Warning: No valid timestamps found. Skipping time-based checks.\n")
     else:
-        print("Warning: 'EdgeStartTimestamp' column not found; "
-              "skipping time-based checks.\n")
+        print("⚠ Warning: 'EdgeStartTimestamp' column not found; skipping time-based checks.\n")
 
     print("=== Risk Analysis Complete ===")
     print("Consider investigating any flagged IPs, large requests, or after-hours spikes.")

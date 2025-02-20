@@ -9,14 +9,18 @@ This module orchestrates the data pipeline by:
 5. Generating an HTML report summarizing the findings.
 """
 
+# --- Standard library imports ---
 import logging
+
+# --- Third-party imports ---
 import pandas as pd
 
-# Use relative imports (note the leading dot):
-from .config import DATA_PATH
-from .eda import perform_eda
-from .risk_analysis import perform_risk_analysis
-from .report_generator import generate_html_report
+# --- Internal module imports ---
+from scripts.config import DATA_PATH
+from scripts.eda import perform_eda
+from scripts.risk_analysis import perform_risk_analysis
+from scripts.report_generator import generate_html_report
+
 
 def load_data(file_path: str = DATA_PATH) -> pd.DataFrame:
     """
@@ -39,6 +43,7 @@ def load_data(file_path: str = DATA_PATH) -> pd.DataFrame:
         logging.error("Error loading data: %s", e)
         raise
 
+
 def main() -> None:
     """
     Main function to run the pipeline.
@@ -59,6 +64,7 @@ def main() -> None:
     report_file = "security_report.html"
     generate_html_report(eda_results, risk_results, report_file)
     logging.info("Report generated: %s", report_file)
+
 
 if __name__ == "__main__":
     main()

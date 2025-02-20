@@ -1,0 +1,354 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Security Analysis Report</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+                background-color: #f9f9f9;
+            }
+            h1, h2 {
+                color: #2C3E50;
+            }
+            h2 {
+                border-bottom: 2px solid #ddd;
+                padding-bottom: 5px;
+            }
+            .section {
+                margin-bottom: 40px;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            .plot {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+            }
+            .timestamp {
+                font-size: 14px;
+                color: #555;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Security Analysis Report</h1>
+        <p class="timestamp">Generated on: 2025-02-20 01:05:31</p>
+        
+        <div class="section">
+            <h2>1. Data Summary</h2>
+            <table border="1" class="dataframe table table-striped">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ClientASN</th>
+      <th>ClientSrcPort</th>
+      <th>ClientRequestBytes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>30000.000000</td>
+      <td>30000.000000</td>
+      <td>3.000000e+04</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>219500.916033</td>
+      <td>42623.112600</td>
+      <td>5.333680e+03</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>163723.246214</td>
+      <td>14736.897662</td>
+      <td>1.957028e+04</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>6.110000e+02</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>28126.000000</td>
+      <td>36344.750000</td>
+      <td>3.470000e+03</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>265312.000000</td>
+      <td>45238.000000</td>
+      <td>4.107000e+03</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>396982.000000</td>
+      <td>53494.000000</td>
+      <td>6.303000e+03</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>396986.000000</td>
+      <td>65527.000000</td>
+      <td>1.545540e+06</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <div class="section">
+            <h2>2. Missing Values</h2>
+            <table border="1" class="dataframe table table-bordered">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missing Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ClientIP</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestHost</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestMethod</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestURI</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>EdgeStartTimestamp</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ZoneName</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientASN</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientCountry</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientDeviceType</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientSrcPort</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestBytes</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestPath</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestReferer</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestScheme</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ClientRequestUserAgent</th>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <div class="section">
+            <h2>3. Duplicate Rows</h2>
+            <p>Duplicate rows: 0</p>
+        </div>
+        
+        <div class="section">
+            <h2>4. Visual Explorations</h2>
+            
+            <h3>Distribution of Client Request Bytes</h3>
+            <img src='plots\client_request_bytes.png' class='plot'>
+            
+            <h3>Top 10 Client Countries</h3>
+            <img src='plots\top_client_countries.png' class='plot'>
+            
+            <h3>Requests per Hour</h3>
+            <img src='plots\requests_per_hour.png' class='plot'>
+        </div>
+        
+        <div class="section">
+            <h2>5. Risk Analysis</h2>
+            
+            <h3>Suspicious IPs</h3>
+            <table border="1" class="dataframe table table-bordered">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Request Count</th>
+    </tr>
+    <tr>
+      <th>ClientIP</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>53.153.77.110</th>
+      <td>156</td>
+    </tr>
+    <tr>
+      <th>208.150.99.181</th>
+      <td>119</td>
+    </tr>
+    <tr>
+      <th>125.227.246.131</th>
+      <td>116</td>
+    </tr>
+    <tr>
+      <th>185.24.37.122</th>
+      <td>115</td>
+    </tr>
+    <tr>
+      <th>222.30.33.183</th>
+      <td>114</td>
+    </tr>
+    <tr>
+      <th>129.53.13.62</th>
+      <td>114</td>
+    </tr>
+    <tr>
+      <th>209.158.28.49</th>
+      <td>114</td>
+    </tr>
+    <tr>
+      <th>192.19.249.147</th>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>159.168.200.38</th>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>21.166.16.150</th>
+      <td>112</td>
+    </tr>
+    <tr>
+      <th>195.171.155.166</th>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>11.148.137.128</th>
+      <td>109</td>
+    </tr>
+    <tr>
+      <th>157.226.241.234</th>
+      <td>108</td>
+    </tr>
+    <tr>
+      <th>13.235.167.220</th>
+      <td>107</td>
+    </tr>
+    <tr>
+      <th>26.158.117.152</th>
+      <td>106</td>
+    </tr>
+    <tr>
+      <th>88.40.53.243</th>
+      <td>106</td>
+    </tr>
+    <tr>
+      <th>132.107.158.218</th>
+      <td>105</td>
+    </tr>
+    <tr>
+      <th>117.200.193.5</th>
+      <td>105</td>
+    </tr>
+    <tr>
+      <th>56.172.84.231</th>
+      <td>105</td>
+    </tr>
+    <tr>
+      <th>172.73.227.140</th>
+      <td>105</td>
+    </tr>
+    <tr>
+      <th>57.112.34.158</th>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>26.249.70.42</th>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>159.147.102.107</th>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>23.159.246.188</th>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>7.113.8.157</th>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>98.197.20.168</th>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>133.157.216.48</th>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>221.112.50.103</th>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>218.83.247.217</th>
+      <td>101</td>
+    </tr>
+  </tbody>
+</table>
+            
+            <h3>Large Request Sizes</h3>
+            <p>Threshold for large requests: 6599.00. Number of large requests: 1499</p>
+            
+            <h3>After-Hours Requests</h3>
+            <p>Number of after-hours requests: 14477</p>
+        </div>
+    </body>
+    </html>
+    

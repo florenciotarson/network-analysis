@@ -31,87 +31,89 @@ After running this script:
 - Use these findings to inform a security policy in a separate script or notebook.
 """
 
+import logging
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Use a relative import to pull in DATA_PATH from config.py
-# (Requires __init__.py in the same folder so Python treats 'scripts' as a package)
-from .config import DATA_PATH
+# 🔹 Safe import of DATA_PATH from config.py
+try:
+    from scripts.config import DATA_PATH
+except ImportError:
+    logging.warning("Could not import DATA_PATH from config. Using default path '../data/network_data.csv'.")
+    DATA_PATH = "../data/network_data.csv"  # Default fallback
 
 def main():
     """
     Main function to load, inspect, and visualize network traffic data.
-
-    Steps:
-    ------
-    1. Load Data:
-       - Reads the network traffic CSV (using the path defined in config.py).
-    2. Basic Inspection:
-       - Prints a sample of rows (head), info about data types, missing values, 
-         and duplicates.
-    3. Timestamp Conversion:
-       - Converts 'EdgeStartTimestamp' to a datetime object if present.
-    4. Statistical Summary:
-       - Generates basic stats for numerical columns.
-    5. Visual Explorations:
-       - Distribution of 'ClientRequestBytes' to spot potential outliers or 
-         abnormal usage.
-       - Bar plot of top 10 'ClientCountry' entries to identify geographic patterns.
-       - Time series analysis (requests per hour) if timestamps are valid.
     """
 
-    # 1. Load the network traffic data using the constant from config.py
-    df = pd.read_csv(DATA_PATH)
+    # 1. Load the dataset with error handling
+    try:
+        df = pd.read_csv(DATA_PATH)
+    except FileNotFoundError:
+        print(f" Error: Data file '{DATA_PATH}' not found. Please check the path.")
+        return
+    except pd.errors.EmptyDataError:
+        print(" Error: The CSV file is empty. Please provide a valid dataset.")
+        return
+    except Exception as e:
+        print(f" Unexpected error while loading data: {e}")
+        return
+
+    # Basic check: ensure we have rows to analyze
+    if df.empty:
+        print("⚠ Warning: No data found in the CSV file. Skipping analysis.")
+        return
 
     # 2. Display the first few rows to understand the structure
-    print("=== First Few Rows of the Data ===")
-    print(df.head())
+    print("\n=== First Few Rows of the Data ===")
+    print(df.head(), "\n")
 
-    # Get basic information about the dataset
+    # 3. Get basic information about the dataset
     print("\n=== DataFrame Info ===")
-    print(df.info())
+    print(df.info(), "\n")
 
-    # Check for missing values in each column
-    print("\n=== Missing Values in Each Column ===")
-    print(df.isnull().sum())
+    # 4. Check for missing values in each column
+    missing_values = df.isnull().sum()
+    if missing_values.any():
+        print("\n=== Missing Values in Each Column ===")
+        print(missing_values[missing_values > 0], "\n")
+    else:
+        print("\n No missing values detected.\n")
 
-    # Check for duplicate rows (often important in network logs)
+    # 5. Check for duplicate rows
     duplicates = df.duplicated().sum()
-    print(f"\n=== Number of Duplicate Rows: {duplicates} ===")
+    print(f"\n=== Number of Duplicate Rows: {duplicates} ===\n")
 
-    # 3. Convert timestamps to datetime (if you have a timestamp column)
+    # 6. Convert timestamps if available
     if 'EdgeStartTimestamp' in df.columns:
-        df['EdgeStartTimestamp'] = pd.to_datetime(
-            df['EdgeStartTimestamp'],
-            errors='coerce'
-        )
+        df['EdgeStartTimestamp'] = pd.to_datetime(df['EdgeStartTimestamp'], errors='coerce')
         invalid_timestamps = df['EdgeStartTimestamp'].isna().sum()
-        print(f"\n=== Rows with Invalid Timestamps: {invalid_timestamps} ===")
+        if invalid_timestamps > 0:
+            print(f"\n⚠ Warning: {invalid_timestamps} rows have invalid timestamps.\n")
 
-    # 4. Generate basic statistics for numerical columns
+    # 7. Generate basic statistics for numerical columns
     print("\n=== Basic Statistical Summary (Numerical Columns) ===")
     print(df.describe())
 
-    # 5. Visual Explorations
+    # 8. Visual Explorations
     # ----------------------
 
     # A) Distribution of ClientRequestBytes
-    if 'ClientRequestBytes' in df.columns:
+    if 'ClientRequestBytes' in df.columns and df['ClientRequestBytes'].notna().any():
         plt.figure(figsize=(8, 5))
-        sns.histplot(df['ClientRequestBytes'], bins=50, kde=True)
+        sns.histplot(df['ClientRequestBytes'].dropna(), bins=50, kde=True)
         plt.title("Distribution of Client Request Bytes")
-        plt.xlabel("ClientRequestBytes")
+        plt.xlabel("Client Request Bytes")
         plt.ylabel("Count")
         plt.show()
+    else:
+        print("\n⚠ Skipping 'ClientRequestBytes' plot due to missing or invalid data.\n")
 
     # B) Top 10 Client Countries
-    if 'ClientCountry' in df.columns:
-        top_countries = (
-            df['ClientCountry']
-            .value_counts()
-            .head(10)
-        )
+    if 'ClientCountry' in df.columns and df['ClientCountry'].notna().any():
+        top_countries = df['ClientCountry'].value_counts().head(10)
         plt.figure(figsize=(8, 5))
         sns.barplot(x=top_countries.index, y=top_countries.values)
         plt.title("Top 10 Client Countries")
@@ -120,28 +122,34 @@ def main():
         plt.ylabel("Count")
         plt.tight_layout()
         plt.show()
+    else:
+        print("\n⚠ Skipping 'ClientCountry' plot due to missing or invalid data.\n")
 
     # C) Requests Over Time (Hourly)
     if 'EdgeStartTimestamp' in df.columns and df['EdgeStartTimestamp'].notna().any():
-        df.sort_values('EdgeStartTimestamp', inplace=True)
+        df = df.sort_values('EdgeStartTimestamp')
         df.set_index('EdgeStartTimestamp', inplace=True)
         hourly_counts = df.resample('H').size()
 
-        plt.figure(figsize=(10, 5))
-        hourly_counts.plot()
-        plt.title("Requests per Hour")
-        plt.xlabel("Time (Hourly)")
-        plt.ylabel("Number of Requests")
-        plt.show()
+        if not hourly_counts.empty:
+            plt.figure(figsize=(10, 5))
+            hourly_counts.plot()
+            plt.title("Requests per Hour")
+            plt.xlabel("Time (Hourly)")
+            plt.ylabel("Number of Requests")
+            plt.show()
+        else:
+            print("\n⚠ Not enough timestamp data for time series analysis.\n")
 
-        # Reset index if you need to do further non-time-based analysis
+        # Reset index for further non-time-based analysis
         df.reset_index(inplace=True)
+    else:
+        print("\n⚠ Skipping time series analysis due to missing timestamps.\n")
 
     # Conclusion
-    print("\n=== Analysis Complete ===")
+    print("\n Analysis Complete")
     print("Review the printed outputs and generated plots for insights.")
-    print("Consider how anomalies or unusual patterns might pose security risks.")
-    print("Next, you can develop a security policy to address these findings.\n")
+    print("Consider how anomalies or unusual patterns might pose security risks.\n")
 
 if __name__ == "__main__":
     main()

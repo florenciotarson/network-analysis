@@ -7,6 +7,7 @@ HTML document.
 """
 
 import logging
+import os
 from datetime import datetime
 from typing import Dict, Any
 
@@ -18,14 +19,9 @@ def generate_html_report(
     """
     Generate an HTML report including EDA results and risk analysis.
 
-    This function consolidates information such as summary statistics, missing
-    values, duplicates, and visual plots from EDA, as well as security risks
-    (e.g., suspicious IPs, large requests, after-hours requests) into a single
-    HTML file.
-
     Args:
         eda_results (Dict[str, Any]): 
-            A dictionary containing EDA results. Typically includes:
+            A dictionary containing EDA results, including:
               - 'summary': HTML table of DataFrame.describe()
               - 'missing': HTML table showing missing values
               - 'duplicates': A simple HTML string with the count of duplicates
@@ -46,9 +42,16 @@ def generate_html_report(
     Returns:
         None
     """
+
+    # Ensure the output directory exists
+    output_dir = os.path.dirname(output_file)
+    if output_dir and not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    # HTML Content
     html_content = f"""
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>Security Analysis Report</title>
@@ -58,11 +61,10 @@ def generate_html_report(
                 margin: 20px;
                 background-color: #f9f9f9;
             }}
-            h1 {{
+            h1, h2 {{
                 color: #2C3E50;
             }}
             h2 {{
-                color: #34495E;
                 border-bottom: 2px solid #ddd;
                 padding-bottom: 5px;
             }}
@@ -91,11 +93,15 @@ def generate_html_report(
                 margin-bottom: 20px;
                 border: 1px solid #ddd;
             }}
+            .timestamp {{
+                font-size: 14px;
+                color: #555;
+            }}
         </style>
     </head>
     <body>
         <h1>Security Analysis Report</h1>
-        <p>Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+        <p class="timestamp">Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
         
         <div class="section">
             <h2>1. Data Summary</h2>
@@ -114,30 +120,20 @@ def generate_html_report(
         
         <div class="section">
             <h2>4. Visual Explorations</h2>
+            
             <h3>Distribution of Client Request Bytes</h3>
-            {(
-                f"<img src='{eda_results['plot1']}' class='plot'>"
-                if eda_results.get('plot1') not in [None, "Not available"]
-                else "<p>Plot not available.</p>"
-            )}
+            {f"<img src='{eda_results['plot1']}' class='plot'>" if eda_results.get('plot1') and os.path.exists(eda_results['plot1']) else "<p>Plot not available.</p>"}
             
             <h3>Top 10 Client Countries</h3>
-            {(
-                f"<img src='{eda_results['plot2']}' class='plot'>"
-                if eda_results.get('plot2') not in [None, "Not available"]
-                else "<p>Plot not available.</p>"
-            )}
+            {f"<img src='{eda_results['plot2']}' class='plot'>" if eda_results.get('plot2') and os.path.exists(eda_results['plot2']) else "<p>Plot not available.</p>"}
             
             <h3>Requests per Hour</h3>
-            {(
-                f"<img src='{eda_results['plot3']}' class='plot'>"
-                if eda_results.get('plot3') not in [None, "Not available"]
-                else "<p>Plot not available.</p>"
-            )}
+            {f"<img src='{eda_results['plot3']}' class='plot'>" if eda_results.get('plot3') and os.path.exists(eda_results['plot3']) else "<p>Plot not available.</p>"}
         </div>
         
         <div class="section">
             <h2>5. Risk Analysis</h2>
+            
             <h3>Suspicious IPs</h3>
             {risk_results.get('suspicious_ips', '<p>No IP risk analysis available.</p>')}
             
@@ -151,10 +147,11 @@ def generate_html_report(
     </html>
     """
 
+    # Save the HTML report
     try:
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(html_content)
-        logging.info("HTML report generated successfully at '%s'.", output_file)
+        logging.info(" HTML report generated successfully at '%s'.", output_file)
     except OSError as e:
-        logging.error("Error generating HTML report: %s", e)
+        logging.error(" Error generating HTML report: %s", e)
         raise

@@ -1,151 +1,196 @@
 ```markdown
-# network-analysis
+# **network-analysis**
+> **Exploratory Data Analysis & Risk Assessment for Network Traffic**
 
-> **Exploratory Data Analysis & Risk Assessment**
-
-Welcome to this **Assessment Project**! This repository contains a set of scripts and notebooks to perform **exploratory data analysis** and **risk assessment** on network traffic data.
+Welcome to the **Network Analysis & Risk Assessment Project**!  
+This repository contains scripts and notebooks for **exploratory data analysis (EDA)** and **security risk assessment** on network traffic data.
 
 ---
 
-## 1. Introduction
+## **1. Introduction**
 
-This project demonstrates **data analysis**, **logical reasoning**, and the **ability to identify and mitigate security risks**. The main tasks include:
+This project showcases **data analysis**, **logical reasoning**, and **security risk identification & mitigation**. The key objectives include:
 
 - **Data Analysis**  
-  Analyze a provided set of network traffic data and identify potential security risks. Provide comprehensive data analysis, demonstrate logical reasoning, and deliver clear, actionable insights.
+  - Explore network traffic data to detect potential security risks.
+  - Provide comprehensive insights through data-driven analysis.
 
-- **Risk Identification and Policy Development**  
-  Based on your analysis, identify potential security risks and develop a **comprehensive security policy** to mitigate or prevent them. Clearly explain the rationale behind the proposed policy.
+- **Risk Identification & Security Policy Development**  
+  - Identify **threat patterns**, anomalies, and suspicious activities.
+  - Propose an **actionable security policy** based on data findings.
 
-- **Implementation**  
-  Implement a solution to address the identified risks based on the analysis.
-
----
-
-## 2. Project Objectives
-
-1. **Data Analysis**  
-   - Perform a detailed analysis of the provided network traffic data.  
-   - Identify patterns, anomalies, and potential security risks.  
-   - Document your process, insights, and findings.
-
-2. **Risk Identification and Policy Development**  
-   - Outline potential security risks discovered in the analysis.  
-   - Propose a clear and actionable security policy to address those risks.  
-   - Justify your policy decisions with data-driven insights.
-
-3. **Implementation**  
-   - Develop and showcase solutions that address identified security issues.  
-   - Demonstrate how insights from the analysis inform practical remediation steps.
+- **Implementation & Automation**  
+  - Develop solutions to mitigate identified risks.
+  - Automate **risk detection** and generate **security reports**.
 
 ---
 
-## 3. Project Structure
+## **2. Project Objectives**
 
-Below is an overview of the main folders and files in this repository:
+1. **Exploratory Data Analysis (EDA)**  
+   - Perform in-depth **data exploration** on network traffic logs.  
+   - Identify **patterns, anomalies, and potential threats**.  
+   - Summarize key findings in reports and visualizations.
+
+2. **Security Risk Assessment & Policy Recommendations**  
+   - Identify **suspicious behaviors** (e.g., high request volumes, large data transfers).  
+   - Develop **mitigation strategies** based on data-driven insights.  
+   - Document security policies for effective risk management.
+
+3. **Implementation & Reporting**  
+   - Implement **scripts** for automating security assessments.  
+   - Generate **HTML reports** summarizing key risks & findings.  
+   - Provide clear **recommendations** for improving security posture.
+
+---
+
+## **3. Project Structure**
+
+The repository is organized as follows:
 
 ```
 network-analysis/
 ├── data/
-│   └── network_data.csv
+│   └── network_data.csv           # Network traffic dataset
 ├── notebooks/
-│   └── exploratory_analysis.ipynb
+│   └── exploratory_analysis.ipynb # Jupyter notebook for EDA
 ├── scripts/
 │   ├── __init__.py
-│   ├── config.py
-│   ├── data_exploration.py
-│   ├── eda.py
-│   ├── exploratory_analysis.py
-│   ├── pipeline.py
-│   ├── report_generator.py
-│   ├── risk_analysis.py
-│   └── risk_analysis_2.py
+│   ├── config.py                  # Configuration file (paths, thresholds)
+│   ├── data_exploration.py         # Minimal EDA script (prints info, stats)
+│   ├── eda.py                      # Performs statistical & visual EDA
+│   ├── exploratory_analysis.py      # Command-line EDA script
+│   ├── pipeline.py                  # Runs full pipeline (EDA + risk analysis + reporting)
+│   ├── report_generator.py          # Generates HTML reports
+│   ├── risk_analysis.py             # Identifies suspicious activity in traffic logs
+│   ├── risk_analysis_2.py           # Alternative risk analysis script
 ├── README.md
-├── requirements.txt
+├── requirements.txt                 # Dependencies
 └── text.txt
 ```
 
-- **data_exploration.py**  
-  Minimal script for loading and inspecting the network traffic data. Prints basic info and statistics.
-
-- **eda.py**  
-  Contains a function (`perform_eda`) for exploratory data analysis, generating summary stats and plots.
-
-- **exploratory_analysis.py**  
-  Command-line script performing a quick EDA (head, info, missing values, duplicates, etc.).
-
-- **pipeline.py**  
-  Orchestrates the entire pipeline: loading data, performing EDA, running risk analysis, and generating reports.
-
-- **risk_analysis.py / risk_analysis_2.py**  
-  Checks the data for potential security risks such as suspicious IPs, large requests, and after-hours requests.
-
-- **report_generator.py**  
-  Generates an HTML report consolidating EDA and risk analysis results.
+### ** Key Files**
+- **`config.py`** → Defines constants (file paths, thresholds).
+- **`pipeline.py`** → Automates data processing, analysis, and reporting.
+- **`report_generator.py`** → Compiles findings into an HTML report.
+- **`risk_analysis.py / risk_analysis_2.py`** → Detects security risks.
+- **`exploratory_analysis.py`** → Provides quick, command-line data insights.
 
 ---
 
-## 4. How to Use
+## **4. Installation & Usage**
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/<your-username>/network-analysis.git
-   cd network-analysis
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Prepare the data**  
-   Place your `network_data.csv` file in the `data/` folder (or update the path in `config.py`).
-
-4. **Run exploratory analysis**:
-   ```bash
-   python -m scripts.exploratory_analysis
-   ```
-   - Prints out the first few rows, DataFrame info, missing values, duplicates, and basic statistics.
-   - Plots may appear if you have a graphical environment or can be saved to disk.
-
-5. **Generate an HTML report**:
-   ```bash
-   python -m scripts.pipeline
-   ```
-   - Runs EDA, performs risk analysis, and creates a `security_report.html` file.
-
-6. **Review the findings**  
-   - Open the generated `security_report.html` to see summary statistics, missing values, plots, and risk indicators.
-
----
-
-## 5. Security Policy and Mitigation Strategies
-
-After reviewing the analysis, consider drafting a security policy that addresses:
-
-- **Suspicious IP addresses**  
-  - Implement IP-based rate-limiting or geolocation filters.  
-  - Investigate repeated malicious behavior from specific IPs.
-
-- **Large or unusual request sizes**  
-  - Implement thresholds or alerts for abnormally large requests.  
-  - Investigate potential data exfiltration attempts.
-
-- **After-hours traffic**  
-  - Flag or limit requests occurring outside normal business hours if your environment is expected to have low usage then.
-
-- **Other anomalies**  
-  - Monitor sudden spikes in traffic (possible DDoS).  
-  - Track unusual HTTP methods or response codes.
-
----
-
-## License
-
-This project is the property of **Oxecollective Consulting**. You are permitted to clone and use this repository; however, you may not alter or remove any copyright 
-notices or ownership information. All rights to the original code and its intellectual property remain with Oxecollective Consulting.
-
----
-
-[www.oxecollective.com](http://www.oxecollective.com)
+### **🔹 Step 1: Clone the repository**
+```bash
+git clone https://github.com/<your-username>/network-analysis.git
+cd network-analysis
 ```
+
+### **🔹 Step 2: Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+### **🔹 Step 3: Prepare the data**
+Ensure that `network_data.csv` is placed inside the `data/` folder.  
+Alternatively, **update the file path in `config.py`** if your dataset is stored elsewhere.
+
+### **🔹 Step 4: Run exploratory analysis**
+```bash
+python -m scripts.exploratory_analysis
+```
+This will:
+- Display **dataset structure, missing values, and statistics**.
+- Generate **basic visualizations** (histogram, country distribution, time trends).
+
+### **🔹 Step 5: Perform risk analysis**
+```bash
+python -m scripts.risk_analysis
+```
+This will:
+- Identify **suspicious IPs**, **large request sizes**, and **after-hours activity**.
+- Print **risk summaries** and save findings.
+
+### **🔹 Step 6: Generate a security report**
+```bash
+python -m scripts.pipeline
+```
+This will:
+- Run **EDA + Risk Analysis**.
+- Create a **security_report.html** with all findings.
+
+---
+
+## **5. Security Risks & Mitigation Strategies**
+
+Based on network traffic patterns, we focus on the following threats:
+
+### ** 1. Suspicious IP Activity**
+| Risk | Mitigation |
+|------|------------|
+| High request volumes from a single IP | Implement **rate-limiting** & **IP blacklisting** |
+| Repeated requests from unknown locations | Use **geolocation filtering** & **authentication mechanisms** |
+
+### ** 2. Large or Unusual Data Transfers**
+| Risk | Mitigation |
+|------|------------|
+| Requests with abnormally high data size | **Monitor request sizes** & alert on anomalies |
+| Unusual upload/download behavior | **Implement thresholds** & **restrict sensitive endpoints** |
+
+### ** 3. After-Hours Traffic**
+| Risk | Mitigation |
+|------|------------|
+| High traffic outside normal business hours | Flag **non-standard working hours activity** |
+| Potential unauthorized access attempts | Use **access logs** & **user behavior analysis** |
+
+### ** 4. Anomalous Traffic Patterns**
+| Risk | Mitigation |
+|------|------------|
+| Sudden spikes in traffic | Detect **DDoS-like activity** & apply **rate controls** |
+| Unusual HTTP methods or error codes | Track **potential attacks** & apply **firewall rules** |
+
+---
+
+## **6. Next Steps**
+- ** Extend Analysis:**  
+  - Identify more advanced **anomalies and attack patterns**.
+  - Improve risk detection using **machine learning models**.
+
+- ** Automate Reporting:**  
+  - Enhance the **HTML report generator** with more visualizations.
+  - Integrate with **SIEM tools** for security alerts.
+
+- ** Strengthen Security Policies:**  
+  - Implement **proactive risk monitoring** & **automated responses**.
+  - Develop **a real-time risk detection pipeline**.
+
+---
+
+## **7. License & Attribution**
+This project is the property of **Oxecollective Consulting**.  
+Usage is permitted for **learning and internal security assessment** purposes.
+
+> ** Disclaimer:**  
+> This project is for **educational & research purposes**.  
+> It does not replace professional security solutions or policies.
+
+---
+
+## **8. Contact**
+For inquiries, reach out via **[Oxecollective Consulting](http://www.oxecollective.com)**.  
+
+---
+
+## ** Related Resources**
+- [OWASP Security Best Practices](https://owasp.org/)
+- [MITRE ATT&CK Framework](https://attack.mitre.org/)
+- [SANS Security Guidelines](https://www.sans.org/)
+
+---
+
+## **Final Thoughts**
+This project provides a **strong foundation** for **network security analysis**.  
+**Continue iterating and improving risk detection mechanisms for a safer infrastructure! **
+```
+
+---

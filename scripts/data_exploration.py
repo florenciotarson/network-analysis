@@ -25,10 +25,15 @@ Notes:
   a more comprehensive script or notebook.
 """
 
+import logging
 import pandas as pd
 
-# Use a relative import to pull in DATA_PATH from config.py
-from .config import DATA_PATH
+# 🔹 Try importing DATA_PATH from config.py
+try:
+    from scripts.config import DATA_PATH
+except ImportError:
+    logging.warning("Could not import DATA_PATH from config. Using default path '../data/network_data.csv'.")
+    DATA_PATH = "../data/network_data.csv"  # Default fallback
 
 def main():
     """
@@ -43,23 +48,39 @@ def main():
     5. Generate basic statistics for numerical columns.
     """
 
-    # 1. Load the network traffic data using DATA_PATH from config.py
-    df = pd.read_csv(DATA_PATH)
+    # 1. Load the network traffic data with error handling
+    try:
+        df = pd.read_csv(DATA_PATH)
+    except FileNotFoundError:
+        print(f"Error: Data file '{DATA_PATH}' not found. Please check the path.")
+        return
+    except pd.errors.EmptyDataError:
+        print("Error: The CSV file is empty. Please provide a valid dataset.")
+        return
+    except Exception as e:
+        print(f"Unexpected error while loading data: {e}")
+        return
+
+    # Basic check: ensure we have rows to analyze
+    if df.empty:
+        print("No data found. Please verify the CSV file.")
+        return
 
     # 2. Display the first few rows to understand the structure
     print("=== First Few Rows of the Data ===")
-    print(df.head())
+    print(df.head(), "\n")
 
     # 3. Get basic information about the dataset
-    print("\n=== DataFrame Info ===")
-    print(df.info())
+    print("=== DataFrame Info ===")
+    print(df.info(), "\n")
 
     # 4. Check for missing values in each column
-    print("\n=== Missing Values in Each Column ===")
-    print(df.isnull().sum())
+    print("=== Missing Values in Each Column ===")
+    missing_values = df.isnull().sum()
+    print(missing_values[missing_values > 0], "\n")  # Only show columns with missing values
 
     # 5. Generate basic statistics for numerical columns
-    print("\n=== Basic Statistical Summary ===")
+    print("=== Basic Statistical Summary ===")
     print(df.describe())
 
 if __name__ == "__main__":
