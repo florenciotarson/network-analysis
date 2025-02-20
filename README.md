@@ -1,20 +1,26 @@
 ```markdown
 # network-analysis
 
-Welcome to this **Assessment Project**! This repository contains a set of scripts and notebooks to perform exploratory data analysis and risk assessment on network traffic data.
+> **Exploratory Data Analysis & Risk Assessment**
+
+Welcome to this **Assessment Project**! This repository contains a set of scripts and notebooks to perform **exploratory data analysis** and **risk assessment** on network traffic data.
+
+---
 
 ## 1. Introduction
 
-This project demonstrates data analysis, logical reasoning, and the ability to identify and mitigate security risks. The main tasks include:
+This project demonstrates **data analysis**, **logical reasoning**, and the **ability to identify and mitigate security risks**. The main tasks include:
 
 - **Data Analysis**  
-  Analyze a provided set of network traffic data and identify potential security risks. Provide comprehensive data analysis, demonstrate logical reasoning in identifying risks, and deliver clear, actionable insights.
+  Analyze a provided set of network traffic data and identify potential security risks. Provide comprehensive data analysis, demonstrate logical reasoning, and deliver clear, actionable insights.
 
 - **Risk Identification and Policy Development**  
-  Based on your analysis, identify potential security risks and develop a comprehensive security policy to mitigate or prevent them. Clearly explain the rationale behind the proposed policy.
+  Based on your analysis, identify potential security risks and develop a **comprehensive security policy** to mitigate or prevent them. Clearly explain the rationale behind the proposed policy.
 
 - **Implementation**  
   Implement a solution to address the identified risks based on the analysis.
+
+---
 
 ## 2. Project Objectives
 
@@ -31,6 +37,8 @@ This project demonstrates data analysis, logical reasoning, and the ability to i
 3. **Implementation**  
    - Develop and showcase solutions that address identified security issues.  
    - Demonstrate how insights from the analysis inform practical remediation steps.
+
+---
 
 ## 3. Project Structure
 
@@ -75,6 +83,8 @@ network-analysis/
 - **report_generator.py**  
   Generates an HTML report consolidating EDA and risk analysis results.
 
+---
+
 ## 4. How to Use
 
 1. **Clone the repository**:
@@ -88,7 +98,7 @@ network-analysis/
    pip install -r requirements.txt
    ```
 
-3. **Prepare the data**:  
+3. **Prepare the data**  
    Place your `network_data.csv` file in the `data/` folder (or update the path in `config.py`).
 
 4. **Run exploratory analysis**:
@@ -104,8 +114,10 @@ network-analysis/
    ```
    - Runs EDA, performs risk analysis, and creates a `security_report.html` file.
 
-6. **Review the findings**:
+6. **Review the findings**  
    - Open the generated `security_report.html` to see summary statistics, missing values, plots, and risk indicators.
+
+---
 
 ## 5. Security Policy and Mitigation Strategies
 
