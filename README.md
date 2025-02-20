@@ -49,24 +49,30 @@ This project showcases **data analysis**, **logical reasoning**, and **security 
 The repository is organized as follows:
 
 ```
+## 3. Project Structure
+
+The repository is organized as follows:
+
+```bash
 network-analysis/
 ├── data/
-│   └── network_data.csv           # Network traffic dataset
+│   └── network_data.csv              # Network traffic dataset
 ├── notebooks/
-│   └── exploratory_analysis.ipynb # Jupyter notebook for EDA
+│   └── exploratory_analysis.ipynb    # Jupyter notebook for EDA
 ├── scripts/
-│   ├── __init__.py
-│   ├── config.py                  # Configuration file (paths, thresholds)
-│   ├── data_exploration.py         # Minimal EDA script (prints info, stats)
-│   ├── eda.py                      # Performs statistical & visual EDA
-│   ├── exploratory_analysis.py      # Command-line EDA script
-│   ├── pipeline.py                  # Runs full pipeline (EDA + risk analysis + reporting)
-│   ├── report_generator.py          # Generates HTML reports
-│   ├── risk_analysis.py             # Identifies suspicious activity in traffic logs
-│   ├── risk_analysis_2.py           # Alternative risk analysis script
+│   ├── __init__.py                   # Makes 'scripts' a Python package
+│   ├── config.py                     # Configuration file (paths, thresholds)
+│   ├── data_exploration.py           # Minimal EDA script (prints info, stats)
+│   ├── eda.py                        # Performs statistical & visual EDA
+│   ├── exploratory_analysis.py        # Command-line EDA script
+│   ├── pipeline.py                   # Runs full pipeline (EDA + risk analysis + reporting)
+│   ├── report_generator.py           # Generates HTML reports
+│   ├── risk_analysis.py              # Identifies suspicious activity in traffic logs
+│   └── risk_analysis_2.py            # Alternative risk analysis script
 ├── README.md
-├── requirements.txt                 # Dependencies
+├── requirements.txt                  # Dependencies
 └── text.txt
+
 ```
 
 ### ** Key Files**
