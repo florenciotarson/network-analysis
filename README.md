@@ -1,31 +1,41 @@
-```markdown
-# **network-analysis**
+# **Network-Analysis**
 > **Exploratory Data Analysis & Risk Assessment for Network Traffic**
 
 Welcome to the **Network Analysis & Risk Assessment Project**!  
-This repository contains scripts and notebooks for **exploratory data analysis (EDA)** and **security risk assessment** on network traffic data.
+This repository focuses on **exploratory data analysis (EDA)** and **security risk assessment** for network traffic data, delivering a comprehensive approach to identifying threats and mitigating vulnerabilities.
 
 ---
 
-## **1. Introduction**
-
-This project showcases **data analysis**, **logical reasoning**, and **security risk identification & mitigation**. The key objectives include:
-
-- **Data Analysis**  
-  - Explore network traffic data to detect potential security risks.
-  - Provide comprehensive insights through data-driven analysis.
-
-- **Risk Identification & Security Policy Development**  
-  - Identify **threat patterns**, anomalies, and suspicious activities.
-  - Propose an **actionable security policy** based on data findings.
-
-- **Implementation & Automation**  
-  - Develop solutions to mitigate identified risks.
-  - Automate **risk detection** and generate **security reports**.
+## ** Table of Contents**
+1. [Introduction](#introduction)
+2. [Project Objectives](#project-objectives)
+3. [Project Structure](#project-structure)
+4. [Installation & Usage](#installation--usage)
+5. [Security Policy & Mitigation Strategies](#security-policy--mitigation-strategies)
+6. [Contact & Final Thoughts](#contact--final-thoughts)
 
 ---
 
-## **2. Project Objectives**
+## **Introduction**
+
+> This project showcases **data analysis**, **logical reasoning**, and **security risk identification & mitigation**.  
+> The main areas of focus include:
+
+1. **Data Analysis**  
+   - Explore network traffic data to detect potential security risks.  
+   - Provide comprehensive insights through data-driven analysis.
+
+2. **Risk Identification & Security Policy Development**  
+   - Identify **threat patterns**, anomalies, and suspicious activities.  
+   - Propose an **actionable security policy** based on data findings.
+
+3. **Implementation & Automation**  
+   - Develop solutions to mitigate identified risks.  
+   - Automate **risk detection** and generate **security reports**.
+
+---
+
+## **Project Objectives**
 
 1. **Exploratory Data Analysis (EDA)**  
    - Perform in-depth **data exploration** on network traffic logs.  
@@ -70,8 +80,7 @@ network-analysis/
 │   ├── risk_analysis.py              # Identifies suspicious activity in traffic logs
 │   └── risk_analysis_2.py            # Alternative risk analysis script
 ├── README.md
-├── requirements.txt                  # Dependencies
-└── text.txt
+└── requirements.txt                  # Dependencies
 
 ```
 
@@ -194,9 +203,13 @@ For inquiries, reach out via **[Oxecollective Consulting](http://www.oxecollecti
 
 ---
 
-## **Final Thoughts**
-This project provides a **strong foundation** for **network security analysis**.  
-**Continue iterating and improving risk detection mechanisms for a safer infrastructure! **
+## Final Thoughts
+
+> This project provides a **strong foundation** for network security analysis.  
+> **Continue iterating and improving risk detection mechanisms for a safer infrastructure!**  
+>  
+> [www.oxecollective.com](http://www.oxecollective.com)
+
 ```
 
 ---
