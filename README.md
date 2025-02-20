@@ -1,6 +1,6 @@
 
 ## Available translations
-- 🇬🇧 English (Current)
+- 🇺🇸 English (Current)
 - 🇧🇷 [Portuguese](README_pt-br.md)
 
 # **Network-Analysis**
@@ -63,8 +63,6 @@ This repository focuses on **exploratory data analysis (EDA)** and **security ri
 
 ## **Project Structure**
 
-The repository is organized as follows:
-
 ```bash
 network-analysis/
 ├── data/
@@ -76,17 +74,22 @@ network-analysis/
 │   ├── config.py                     # Configuration file (paths, thresholds)
 │   ├── data_exploration.py           # Minimal EDA script (prints info, stats)
 │   ├── eda.py                        # Performs statistical & visual EDA
-│   ├── exploratory_analysis.py        # Command-line EDA script
+│   ├── exploratory_analysis.py       # Command-line EDA script
 │   ├── pipeline.py                   # Runs full pipeline (EDA + risk analysis + reporting)
 │   ├── report_generator.py           # Generates HTML reports
 │   ├── risk_analysis.py              # Identifies suspicious activity in traffic logs
-│   └── security_dashboard.py          # Streamlit-based Security Dashboard
-├── README.md
-├── requirements.txt                  # Dependencies
-└── security_report.html               # Security analysis report
-
-
+│   ├── security_dashboard.py         # Streamlit-based Security Dashboard
+│   ├── block_suspicious_ips.py      # Blocks suspicious IPs based on analysis
+│   ├── detect_suspicious_ips.py     # Detects suspicious IPs from logs
+│   ├── network_monitor.py            # Monitors network traffic
+├── README.md                         # Project documentation
+├── requirements.txt                  # Dependencies for the project
+├── network_security_scripts.md       # Security scripts documentation
+├── SECURITY_POLICY.md                # Security policy document
+└── security_report.html              # Security analysis report
 ```
+
+---
 
 ### ** Key Files**
 - **`config.py`** → Defines constants (file paths, thresholds).

@@ -1,7 +1,7 @@
 
 ## Traduções Disponíveis
 - 🇧🇷 Português (Atual)
-- 🇬🇧 [Inglês](network_security_scripts.md)
+- 🇺🇸 [Inglês](network_security_scripts.md)
 
 
 # Documentação dos Scripts de Segurança de Rede

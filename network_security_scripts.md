@@ -1,6 +1,6 @@
 
 ## Available Translations
-- 🇬🇧 English (Current)
+- 🇺🇸 English (Current)
 - 🇧🇷 [Portuguese](network_security_scripts_pt-br.md)
 
 # Network Security Scripts Documentation

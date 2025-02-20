@@ -1,6 +1,6 @@
 
 ## Available translations
-- 🇬🇧 English (Current)
+- 🇺🇸 English (Current)
 - 🇧🇷 [Portuguese](SECURITY_POLICY_pt-br.md)
 
 # Security Policy (`SECURITY_POLICY.md`)

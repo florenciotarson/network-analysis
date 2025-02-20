@@ -1,7 +1,7 @@
 
 ## Traduções disponíveis
-- 🇬🇧 [English](README.md)
 - 🇧🇷 Português (Atual)
+- 🇺🇸 [Inglês](README.md)
 
 # Análise de Rede
 
@@ -64,27 +64,30 @@ Este repositório foca na **análise exploratória de dados (EDA)** e na **avali
 
 ## **Estrutura do Projeto**
 
-O repositório está organizado da seguinte forma:
-
 ```bash
 network-analysis/
 ├── data/
-│   └── network_data.csv              # Conjunto de dados de tráfego de rede
+│   └── network_data.csv              # Network traffic dataset
 ├── notebooks/
-│   └── exploratory_analysis.ipynb    # Jupyter notebook para EDA
+│   └── exploratory_analysis.ipynb    # Jupyter notebook for EDA
 ├── scripts/
-│   ├── __init__.py                   # Torna 'scripts' um pacote Python
-│   ├── config.py                     # Arquivo de configuração (caminhos, limites)
-│   ├── data_exploration.py           # Script de EDA básico (exibe informações e estatísticas)
-│   ├── eda.py                        # Realiza EDA estatístico e visual
-│   ├── exploratory_analysis.py        # Script de EDA via linha de comando
-│   ├── pipeline.py                   # Executa todo o pipeline (EDA + análise de riscos + relatórios)
-│   ├── report_generator.py           # Gera relatórios HTML
-│   ├── risk_analysis.py              # Identifica atividades suspeitas nos logs de tráfego
-│   └── security_dashboard.py          # Painel de Segurança interativo via Streamlit
-├── README.md
-├── requirements.txt                   # Dependências
-└── security_report.html                # Relatório de segurança
+│   ├── __init__.py                   # Makes 'scripts' a Python package
+│   ├── config.py                     # Configuration file (paths, thresholds)
+│   ├── data_exploration.py           # Minimal EDA script (prints info, stats)
+│   ├── eda.py                        # Performs statistical & visual EDA
+│   ├── exploratory_analysis.py       # Command-line EDA script
+│   ├── pipeline.py                   # Runs full pipeline (EDA + risk analysis + reporting)
+│   ├── report_generator.py           # Generates HTML reports
+│   ├── risk_analysis.py              # Identifies suspicious activity in traffic logs
+│   ├── security_dashboard.py         # Streamlit-based Security Dashboard
+│   ├── block_suspicious_ips.py      # Blocks suspicious IPs based on analysis
+│   ├── detect_suspicious_ips.py     # Detects suspicious IPs from logs
+│   ├── network_monitor.py            # Monitors network traffic
+├── README.md                         # Project documentation
+├── requirements.txt                  # Dependencies for the project
+├── network_security_scripts.md       # Security scripts documentation
+├── SECURITY_POLICY.md                # Security policy document
+└── security_report.html              # Security analysis report
 ```
 
 ---
