@@ -11,6 +11,7 @@ import os
 from datetime import datetime
 from typing import Dict, Any
 
+
 def generate_html_report(
     eda_results: Dict[str, Any],
     risk_results: Dict[str, Any],
@@ -101,7 +102,9 @@ def generate_html_report(
     </head>
     <body>
         <h1>Security Analysis Report</h1>
-        <p class="timestamp">Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+        <p class="timestamp">
+            Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+        </p>
         
         <div class="section">
             <h2>1. Data Summary</h2>
@@ -122,13 +125,25 @@ def generate_html_report(
             <h2>4. Visual Explorations</h2>
             
             <h3>Distribution of Client Request Bytes</h3>
-            {f"<img src='{eda_results['plot1']}' class='plot'>" if eda_results.get('plot1') and os.path.exists(eda_results['plot1']) else "<p>Plot not available.</p>"}
+            {(
+                f"<img src='{eda_results['plot1']}' class='plot'>"
+                if eda_results.get('plot1') and os.path.exists(eda_results['plot1'])
+                else "<p>Plot not available.</p>"
+            )}
             
             <h3>Top 10 Client Countries</h3>
-            {f"<img src='{eda_results['plot2']}' class='plot'>" if eda_results.get('plot2') and os.path.exists(eda_results['plot2']) else "<p>Plot not available.</p>"}
+            {(
+                f"<img src='{eda_results['plot2']}' class='plot'>"
+                if eda_results.get('plot2') and os.path.exists(eda_results['plot2'])
+                else "<p>Plot not available.</p>"
+            )}
             
             <h3>Requests per Hour</h3>
-            {f"<img src='{eda_results['plot3']}' class='plot'>" if eda_results.get('plot3') and os.path.exists(eda_results['plot3']) else "<p>Plot not available.</p>"}
+            {(
+                f"<img src='{eda_results['plot3']}' class='plot'>"
+                if eda_results.get('plot3') and os.path.exists(eda_results['plot3'])
+                else "<p>Plot not available.</p>"
+            )}
         </div>
         
         <div class="section">
@@ -151,7 +166,7 @@ def generate_html_report(
     try:
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(html_content)
-        logging.info(" HTML report generated successfully at '%s'.", output_file)
+        logging.info("HTML report generated successfully at '%s'.", output_file)
     except OSError as e:
-        logging.error(" Error generating HTML report: %s", e)
+        logging.error("Error generating HTML report: %s", e)
         raise

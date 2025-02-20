@@ -1,6 +1,10 @@
+# requirements.txt
+
 pandas
 numpy
 matplotlib
 scikit-learn
 seaborn
-logging
+
+# logging is part of Python's standard library 
+# and does not need to be installed via pip.

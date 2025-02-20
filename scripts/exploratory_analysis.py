@@ -1,34 +1,19 @@
 """
 exploratory_analysis.py
 
-This script performs an exploratory data analysis (EDA) on network traffic data. 
-It loads the data, checks for missing values or duplicates, converts timestamps, 
+This script performs an exploratory data analysis (EDA) on network traffic data.
+It loads the data, checks for missing values or duplicates, converts timestamps,
 and generates basic statistics and plots to help identify potential security risks.
 
 Usage:
 ------
-1. Make sure you have `pandas`, `seaborn`, and `matplotlib` installed:
+1. Install required dependencies:
    pip install pandas seaborn matplotlib
 
-2. Place this script in your 'scripts' folder (or adjust the path to your CSV
-   accordingly). If your CSV is in a folder named 'data' at the same level, then
-   the path from config.py will be used.
+2. Ensure your dataset is inside a `data/` folder or update `config.py`.
 
-3. From your project's root directory, run:
+3. Run:
    python -m scripts.exploratory_analysis
-
-Notes:
-------
-- Identifying suspicious IPs or countries with unusual request volumes can
-  highlight potential malicious scanning or attacks.
-- Large or abnormal request sizes could indicate data exfiltration attempts.
-- Unusual spikes in traffic over time might point to DDoS attacks or other anomalies.
-
-After running this script:
-- Review the console output for DataFrame info, missing values, duplicates, 
-  and basic stats.
-- Inspect the generated plots (histogram, bar chart, time series) for any red flags.
-- Use these findings to inform a security policy in a separate script or notebook.
 """
 
 import logging
@@ -40,7 +25,10 @@ import matplotlib.pyplot as plt
 try:
     from scripts.config import DATA_PATH
 except ImportError:
-    logging.warning("Could not import DATA_PATH from config. Using default path '../data/network_data.csv'.")
+    logging.warning(
+        "Could not import DATA_PATH from config. "
+        "Using default path '../data/network_data.csv'."
+    )
     DATA_PATH = "../data/network_data.csv"  # Default fallback
 
 def main():
@@ -52,18 +40,21 @@ def main():
     try:
         df = pd.read_csv(DATA_PATH)
     except FileNotFoundError:
-        print(f" Error: Data file '{DATA_PATH}' not found. Please check the path.")
+        print(f"Error: Data file '{DATA_PATH}' not found. Please check the path.")
         return
     except pd.errors.EmptyDataError:
-        print(" Error: The CSV file is empty. Please provide a valid dataset.")
+        print("Error: The CSV file is empty. Please provide a valid dataset.")
         return
-    except Exception as e:
-        print(f" Unexpected error while loading data: {e}")
+    except pd.errors.ParserError:
+        print("Error: CSV parsing issue detected. Check the file format.")
+        return
+    except OSError:
+        print("Error: Issue accessing the file. Check file permissions.")
         return
 
     # Basic check: ensure we have rows to analyze
     if df.empty:
-        print("⚠ Warning: No data found in the CSV file. Skipping analysis.")
+        print("Warning: No data found in the CSV file. Skipping analysis.")
         return
 
     # 2. Display the first few rows to understand the structure
@@ -80,7 +71,7 @@ def main():
         print("\n=== Missing Values in Each Column ===")
         print(missing_values[missing_values > 0], "\n")
     else:
-        print("\n No missing values detected.\n")
+        print("\nNo missing values detected.\n")
 
     # 5. Check for duplicate rows
     duplicates = df.duplicated().sum()
@@ -88,10 +79,12 @@ def main():
 
     # 6. Convert timestamps if available
     if 'EdgeStartTimestamp' in df.columns:
-        df['EdgeStartTimestamp'] = pd.to_datetime(df['EdgeStartTimestamp'], errors='coerce')
+        df['EdgeStartTimestamp'] = pd.to_datetime(
+            df['EdgeStartTimestamp'], errors='coerce'
+        )
         invalid_timestamps = df['EdgeStartTimestamp'].isna().sum()
         if invalid_timestamps > 0:
-            print(f"\n⚠ Warning: {invalid_timestamps} rows have invalid timestamps.\n")
+            print(f"\nWarning: {invalid_timestamps} rows have invalid timestamps.\n")
 
     # 7. Generate basic statistics for numerical columns
     print("\n=== Basic Statistical Summary (Numerical Columns) ===")
@@ -147,7 +140,7 @@ def main():
         print("\n⚠ Skipping time series analysis due to missing timestamps.\n")
 
     # Conclusion
-    print("\n Analysis Complete")
+    print("\nAnalysis Complete")
     print("Review the printed outputs and generated plots for insights.")
     print("Consider how anomalies or unusual patterns might pose security risks.\n")
 

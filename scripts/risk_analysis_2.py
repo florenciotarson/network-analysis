@@ -32,7 +32,10 @@ import pandas as pd
 try:
     from scripts.config import DATA_PATH, SUSPICIOUS_IP_THRESHOLD
 except ImportError:
-    logging.warning("Could not import config values. Using default values.")
+    logging.warning(
+        "Could not import config values. "
+        "Using default values: '../data/network_data.csv' & threshold=100."
+    )
     DATA_PATH = "../data/network_data.csv"
     SUSPICIOUS_IP_THRESHOLD = 100  # Default fallback
 
@@ -54,8 +57,14 @@ def main():
     except FileNotFoundError:
         print(f"Error: Data file '{DATA_PATH}' not found. Please check the path.")
         return
-    except Exception as e:
-        print(f"Error loading data: {e}")
+    except pd.errors.EmptyDataError:
+        print("Error: The CSV file is empty. Please provide a valid dataset.")
+        return
+    except pd.errors.ParserError:
+        print("Error: CSV parsing issue detected. Check the file format.")
+        return
+    except OSError:
+        print("Error: Issue accessing the file. Check file permissions.")
         return
 
     # Basic check: ensure we have rows to analyze
@@ -72,7 +81,9 @@ def main():
 
         suspicious_ips = ip_counts[ip_counts > SUSPICIOUS_IP_THRESHOLD]
         if not suspicious_ips.empty:
-            print(f"Suspicious IPs (more than {SUSPICIOUS_IP_THRESHOLD} requests):")
+            print(
+                f"Suspicious IPs (more than {SUSPICIOUS_IP_THRESHOLD} requests):"
+            )
             print(suspicious_ips)
             print()
     else:
@@ -91,11 +102,11 @@ def main():
 
     # 4. Inspect time distribution if a timestamp column is present
     if 'EdgeStartTimestamp' in df.columns:
-        df['EdgeStartTimestamp'] = pd.to_datetime(df['EdgeStartTimestamp'], errors='coerce')
-        
+        df['EdgeStartTimestamp'] = pd.to_datetime(
+            df['EdgeStartTimestamp'], errors='coerce'
+        )
         # Remove invalid timestamps
         df = df.dropna(subset=['EdgeStartTimestamp'])
-        
         if not df.empty:
             df['Hour'] = df['EdgeStartTimestamp'].dt.hour
             after_hours = df[(df['Hour'] < 8) | (df['Hour'] > 18)]
@@ -103,14 +114,25 @@ def main():
             print("=== After-Hours Requests ===")
             print(f"Total requests outside 8 AM-6 PM: {len(after_hours)}\n")
         else:
-            print(" Warning: No valid timestamps found. Skipping time-based checks.\n")
+            print(
+                "⚠ Warning: No valid timestamps found. "
+                "Skipping time-based checks.\n"
+            )
     else:
-        print(" Warning: 'EdgeStartTimestamp' column not found; skipping time-based checks.\n")
+        print(
+            "⚠ Warning: 'EdgeStartTimestamp' column not found; "
+            "skipping time-based checks.\n"
+        )
 
     print("=== Risk Analysis Complete ===")
-    print("Consider investigating any flagged IPs, large requests, or after-hours spikes.")
-    print("Use these findings to refine your security policy and incident response.\n")
-
+    print(
+        "Consider investigating any flagged IPs, large requests, "
+        "or after-hours spikes."
+    )
+    print(
+        "Use these findings to refine your security policy and "
+        "incident response.\n"
+    )
 
 if __name__ == "__main__":
     main()
