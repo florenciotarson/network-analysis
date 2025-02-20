@@ -1,4 +1,3 @@
-```markdown
 
 ## Traduções disponíveis
 - 🇬🇧 [English](README.md)
