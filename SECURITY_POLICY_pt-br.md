@@ -104,5 +104,3 @@ Agora que a política foi escrita, salve o conteúdo acima em um **arquivo Markd
 2. Crie um novo arquivo chamado **`SECURITY_POLICY_pt-br.md`**.
 3. Cole o conteúdo acima.
 4. Confirme e **envie o arquivo para o GitHub**.
-
-Essa **política de segurança agora está bem documentada** e pode ser usada como referência na **sessão de live coding**.

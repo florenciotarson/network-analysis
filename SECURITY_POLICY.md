@@ -103,5 +103,3 @@ Now that the policy has been written, save the content above in a **Markdown fil
 2. Create a new file named **`SECURITY_POLICY.md`**.
 3. Paste the content above.
 4. Confirm and **upload the file to GitHub**.
-
-This **security policy is now well-documented** and can be used as a reference in the **live coding session**.
