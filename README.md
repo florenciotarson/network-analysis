@@ -170,6 +170,12 @@ This will:
 ## **5.Security Dashboard (security_dashboard.py)**
 **security_dashboard.py** is a Streamlit-based interactive visualization tool that enables real-time security monitoring.
 
+**🔹 Run the Security Dashboard**
+```bash
+streamlit run security_dashboard.py
+```
+The dashboard provides real-time visual insights into security risks.
+
 **🔹 Features:**
 - **Suspicious IP Identification:**
 Highlights IPs exceeding a configurable request threshold.
@@ -186,11 +192,6 @@ Shows trends over time.
 Analyzes client country activity.
 Displays a bar chart of top request origins.
 
-**🔹 Run the Security Dashboard**
-```bash
-streamlit run security_dashboard.py
-```
-The dashboard provides real-time visual insights into security risks.
 
 ## **6. Security Risks & Mitigation Strategies**
 
