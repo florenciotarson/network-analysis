@@ -1,6 +1,6 @@
 
 ## Available translations
-- 🇬🇧 English (Current)
+- 🇺🇸 English (Current)
 - 🇧🇷 [Portuguese](README_pt-br.md)
 
 # **Network-Analysis**
