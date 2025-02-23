@@ -94,13 +94,3 @@ print(anomalous_traffic)
 - Criar **dashboards** para monitoramento em tempo real.
 
 ---
-
-# Salvando o Documento
-
-Agora que a política foi escrita, salve o conteúdo acima em um **arquivo Markdown** chamado `SECURITY_POLICY_pt-br.md`.
-
-### Passos para Salvar:
-1. No seu repositório, vá até a pasta principal.
-2. Crie um novo arquivo chamado **`SECURITY_POLICY_pt-br.md`**.
-3. Cole o conteúdo acima.
-4. Confirme e **envie o arquivo para o GitHub**.
